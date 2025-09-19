@@ -12,10 +12,7 @@
     }
   ],
   "routes": [
-    { "src": "/api/initiate-payment", "dest": "/api/index.js" },
-    { "src": "/api/verify-payment/(.*)", "dest": "/api/index.js" },
-    { "src": "/api/check-payment/(.*)", "dest": "/api/index.js" },
-    { "src": "/api/webhook/payment", "dest": "/api/index.js" },
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
     { "src": "/(.*)", "dest": "/frontend/$1" }
   ]
 }
