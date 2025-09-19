@@ -36,7 +36,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3 mb-5">
                 {/* Logo */}
                 <img 
-                  src="../public/assets/opolo-white.png" 
+                  src="/assets/opolo-white.png" 
                   alt="Opolo Logo" 
                   className="w-50 h-14 object-contain"
                 />
