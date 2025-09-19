@@ -168,8 +168,7 @@ const AiBootcamp = () => {
 
         {/* Who Should Join */}
         <section className="py-24 bg-gray-50">
-          <div className="container mx-auto px-4 lg:px-8 max-w-6xl"
-          style={{ backgroundColor: 'rgba(248, 250, 252, 0.3)' }}>
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
             <motion.div className="text-center mb-16" {...fadeUp}>
               <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">Who Should Join?</h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">This program is designed for ambitious minds ready to sharpen their skills.</p>
@@ -191,10 +190,10 @@ const AiBootcamp = () => {
 
         {/* What You'll Gain & Timeline */}
         <section className="py-24 bg-gray-100">
-          <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
+          <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center ">
             <motion.h2 className="text-4xl lg:text-5xl font-bold mb-12 text-gray-900" {...fadeUp}>What You'll Gain</motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="grid md:grid-cols-2 gap-8 mb-12 ">
               {features.map((feat, idx) => (
                 <motion.div key={idx} whileHover={{ scale: 1.05 }} className="flex items-center gap-4 p-6 rounded-xl bg-white shadow-md cursor-pointer" {...fadeUp} transition={{ delay: idx * 0.1 }}>
                   <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
@@ -203,7 +202,7 @@ const AiBootcamp = () => {
               ))}
             </div>
 
-            <motion.div className="bg-blue-600 text-white p-8 rounded-xl shadow-lg" {...fadeUp}>
+            <motion.div className="bg-blue-600 text-white p-8 rounded-xl shadow-lg bg-[linear-gradient(135deg,#9333ea_0%,#0f172a_100%)]" {...fadeUp}>
               <h3 className="text-2xl font-bold mb-6">Program Timeline</h3>
               <div className="grid md:grid-cols-3 gap-8 text-center">
                 <div>
