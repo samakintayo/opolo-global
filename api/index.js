@@ -12,66 +12,15 @@ const serverless = require("serverless-http");
 const app = express();
 
 // --------------------
-// Middleware
+// CORS Middleware
 // --------------------
 app.use(
   cors({
-    origin: "https://opolo-global.vercel.app/", // change this to your frontend URL when deployed
+    origin: "https://opolo-global.vercel.app", // your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
-// Raw parser ONLY for webhook
-app.post(
-  "/webhook/payment",
-  express.raw({ type: "application/json" }),
-  async (req, res) => {
-    try {
-      const event = JSON.parse(req.body.toString());
-      console.log("📩 Webhook received:", JSON.stringify(event, null, 2));
-
-      const eventType = event.event;
-      if (eventType === "payment.success") {
-        const paymentData = event.data;
-
-        console.log("✅ Payment successful webhook received:", paymentData);
-
-        // Update CSV (⚠️ not persistent in Vercel)
-        if (fs.existsSync(csvPath)) {
-          const rows = [];
-          fs.createReadStream(csvPath)
-            .pipe(csvParser())
-            .on("data", (row) => rows.push(row))
-            .on("end", async () => {
-              const recordIndex = rows.findIndex(
-                (r) => r.PaymentId === paymentData.id
-              );
-              if (recordIndex >= 0) {
-                rows[recordIndex].Status = "PAID";
-                rows[recordIndex].PaidAt = new Date().toISOString();
-
-                const csvWriter = createObjectCsvWriter({
-                  path: csvPath,
-                  header: CSV_HEADERS,
-                });
-                await csvWriter.writeRecords(rows);
-                console.log("💾 CSV updated via webhook");
-              }
-            });
-        }
-      }
-
-      res.json({ received: true });
-    } catch (err) {
-      console.error("❌ Webhook error:", err);
-      res.status(400).send("Webhook error");
-    }
-  }
-);
-
-// JSON parser for other routes
-app.use(express.json());
 
 // --------------------
 // Config & File Setup
@@ -97,38 +46,125 @@ const CSV_HEADERS = [
   { id: "PaidAt", title: "PaidAt" },
 ];
 
-// --------------------
-// Routes
-// --------------------
+// Create CSV if not exists
+if (!fs.existsSync(csvPath)) {
+  const csvWriter = createObjectCsvWriter({
+    path: csvPath,
+    header: CSV_HEADERS,
+    append: true,
+  });
+  csvWriter.writeRecords([]);
+}
 
-// Initiate Payment
-app.post("/api/initiate-payment", async (req, res) => {
-  const { name, email, phone, location, programType, amount } = req.body;
+// --------------------
+// Webhook: Payment
+// --------------------
+app.post(
+  "/webhook/payment",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    try {
+      const event = JSON.parse(req.body.toString());
+      console.log("📩 Webhook received:", JSON.stringify(event, null, 2));
 
-  try {
-    const response = await axios.post(
-      `${CENTIIV_BASE_URL}/api/v1/payments`,
-      {
-        amount,
-        currency: "NGN",
-        email,
-        metadata: {
-          name,
-          phone,
-          location,
-          programType,
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${CENTIIV_API_KEY}`,
-        },
+      const eventType = event.event?.toLowerCase();
+      if (!eventType.includes("payment")) return res.sendStatus(200);
+
+      const paymentId =
+        event.data.id || event.data.metadata?.resourceId?.replace("DPL-", "");
+      if (!paymentId) {
+        console.error("❌ Webhook missing payment ID");
+        return res.sendStatus(400);
       }
-    );
+
+      let normalizedStatus = "pending";
+      if (eventType.includes("success")) normalizedStatus = "success";
+      else if (eventType.includes("fail")) normalizedStatus = "failed";
+
+      // Load existing CSV records
+      let records = [];
+      if (fs.existsSync(csvPath)) {
+        records = await new Promise((resolve, reject) => {
+          const rows = [];
+          fs.createReadStream(csvPath)
+            .pipe(csvParser())
+            .on("data", (row) => rows.push(row))
+            .on("end", () => resolve(rows))
+            .on("error", reject);
+        });
+      }
+
+      // Update or insert record
+      const idx = records.findIndex((r) => r.PaymentId === paymentId);
+      if (idx >= 0) {
+        records[idx].Status = normalizedStatus;
+        records[idx].PaidAt = new Date().toISOString();
+      } else {
+        records.push({
+          PaymentId: paymentId,
+          Status: normalizedStatus,
+          Amount: event.data.amount / 100,
+          PaidAt: new Date().toISOString(),
+        });
+      }
+
+      // Rewrite CSV
+      const csvWriter = createObjectCsvWriter({
+        path: csvPath,
+        header: CSV_HEADERS,
+      });
+      await csvWriter.writeRecords(records);
+
+      console.log(`✅ Payment ${paymentId} updated to ${normalizedStatus}`);
+      res.sendStatus(200);
+    } catch (err) {
+      console.error("Webhook error:", err.message);
+      res.sendStatus(500);
+    }
+  }
+);
+
+// --------------------
+// JSON Parser for other routes
+// --------------------
+app.use(express.json());
+
+// --------------------
+// Initiate Payment
+// --------------------
+app.post("/api/initiate-payment", async (req, res) => {
+  try {
+    const { name, email, phone, location, programType, amount } = req.body;
+
+    const response = await axios({
+      method: "POST",
+      url: `${CENTIIV_BASE_URL}/api/v1/payments`,
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization: `Bearer ${CENTIIV_API_KEY}`,
+      },
+      data: {
+        amount,
+        name,
+        email,
+        currency: "NGN",
+        note: `Payment for ${programType}`,
+        callback_url: "https://opolo-global.vercel.app/payment-status",
+        webhook_url: "https://opolo-global.vercel.app/api/webhook/payment",
+        metadata: { phone, location, programType },
+      },
+    });
+
+    if (!response.data?.success) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Centiiv API error" });
+    }
 
     const paymentData = response.data.data;
 
-    // Save to CSV (⚠️ not persistent in Vercel)
+    // Save pending record to CSV
     const csvWriter = createObjectCsvWriter({
       path: csvPath,
       header: CSV_HEADERS,
@@ -144,65 +180,148 @@ app.post("/api/initiate-payment", async (req, res) => {
         ProgramType: programType,
         Amount: amount,
         PaymentId: paymentData.id,
-        Status: "PENDING",
+        Status: "pending",
         Date: new Date().toISOString(),
         PaidAt: "",
       },
     ]);
 
-    res.json({ paymentData });
-  } catch (error) {
-    console.error("❌ Error initiating payment:", error.response?.data || error);
-    res.status(500).json({ error: "Failed to initiate payment" });
-  }
-});
-
-// Verify Payment
-app.get("/api/verify-payment/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const response = await axios.get(
-      `${CENTIIV_BASE_URL}/api/v1/payments/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${CENTIIV_API_KEY}`,
-        },
-      }
-    );
-
-    const payment = response.data.data;
-    res.json({ payment });
-  } catch (error) {
-    console.error("❌ Error verifying payment:", error.response?.data || error);
-    res.status(500).json({ error: "Failed to verify payment" });
-  }
-});
-
-// Check Payment Status
-app.get("/api/check-payment/:id", async (req, res) => {
-  const { id } = req.params;
-
-  if (!fs.existsSync(csvPath)) {
-    return res.status(404).json({ error: "No records found" });
-  }
-
-  const rows = [];
-  fs.createReadStream(csvPath)
-    .pipe(csvParser())
-    .on("data", (row) => rows.push(row))
-    .on("end", () => {
-      const record = rows.find((r) => r.PaymentId === id);
-      if (record) {
-        res.json(record);
-      } else {
-        res.status(404).json({ error: "Payment not found" });
-      }
+    res.json({
+      success: true,
+      paymentUrl: paymentData.link,
     });
+
+    console.log("Centiiv initiated payment:", paymentData);
+  } catch (error) {
+    console.error(
+      "Initiation error:",
+      error.response?.data || error.message
+    );
+    res
+      .status(500)
+      .json({ success: false, message: "Payment initiation failed" });
+  }
 });
 
 // --------------------
-// Export as serverless handler
+// Verify Payment
+// --------------------
+app.get("/api/verify-payment/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await axios.get(`${CENTIIV_BASE_URL}/api/v1/payments/${id}`, {
+      headers: { Authorization: `Bearer ${CENTIIV_API_KEY}` },
+    });
+
+    const paymentStatus = response.data?.data?.status || "unknown";
+
+    // Load CSV and update
+    const records = await new Promise((resolve, reject) => {
+      const rows = [];
+      fs.createReadStream(csvPath)
+        .pipe(csvParser())
+        .on("data", (row) => rows.push(row))
+        .on("end", () => resolve(rows))
+        .on("error", reject);
+    });
+
+    const updatedRecords = records.map((record) =>
+      record.PaymentId === id ? { ...record, Status: paymentStatus } : record
+    );
+
+    const csvWriter = createObjectCsvWriter({
+      path: csvPath,
+      header: CSV_HEADERS,
+    });
+    await csvWriter.writeRecords(updatedRecords);
+
+    res.json({ success: true, status: paymentStatus });
+  } catch (err) {
+    console.error("Verification error:", err.response?.data || err.message);
+    res
+      .status(500)
+      .json({ success: false, message: "Payment verification failed" });
+  }
+});
+
+// --------------------
+// Check Payment
+// --------------------
+app.get("/api/check-payment/:id", async (req, res) => {
+  const paymentId = req.params.id;
+  try {
+    if (!fs.existsSync(csvPath)) {
+      return res.status(404).json({ success: false, message: "No records yet" });
+    }
+
+    const records = await new Promise((resolve, reject) => {
+      const rows = [];
+      fs.createReadStream(csvPath)
+        .pipe(csvParser())
+        .on("data", (row) => rows.push(row))
+        .on("end", () => resolve(rows))
+        .on("error", reject);
+    });
+
+    const record = records.find((r) => r.PaymentId === paymentId);
+    if (!record) {
+      return res.status(404).json({ success: false, message: "Payment not found" });
+    }
+
+    const normalizedStatus = normalizeStatus(record.Status);
+
+    return res.json({
+      success: true,
+      payment: {
+        id: record.PaymentId,
+        status: normalizedStatus,
+        amount: parseFloat(record.Amount),
+        paidAt: record.PaidAt || null,
+      },
+    });
+
+    function normalizeStatus(status) {
+      if (!status) return "unknown";
+      const s = status.toLowerCase();
+      if (["success", "successful"].includes(s)) return "success";
+      if (["failed", "failure", "error"].includes(s)) return "failed";
+      if (["pending", "processing"].includes(s)) return "pending";
+      return s;
+    }
+  } catch (err) {
+    console.error("Check payment error:", err.message);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+});
+
+// --------------------
+// Payment Callback (frontend redirect)
+// --------------------
+app.get("/payment-callback", (req, res) => {
+  const { status, id } = req.query;
+  if (status === "success") {
+    res.send("Payment successful! ✅ You can close this window.");
+  } else {
+    res.send("Payment failed or pending ❌");
+  }
+});
+
+// --------------------
+// Optional: Download CSV
+// --------------------
+app.get("/api/download-registrations", (req, res) => {
+  if (!fs.existsSync(csvPath)) {
+    return res.status(404).send("No CSV found");
+  }
+  res.download(csvPath, "registrations.csv");
+});
+
+// --------------------
+// Serverless Export
 // --------------------
 module.exports = app;
 module.exports.handler = serverless(app);
