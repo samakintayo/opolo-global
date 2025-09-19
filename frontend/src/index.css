@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(59,130,246,0.6); }
+  50% { box-shadow: 0 0 20px rgba(59,130,246,0.9); }
+}
+.animate-glow {
+  animation: glow 2s infinite alternate;
+}
+
+/* Gradient background overlay */
+.gradient-hero {
+  background: radial-gradient(circle at top left, rgba(59,130,246,0.2), transparent 70%),
+              radial-gradient(circle at bottom right, rgba(236,72,153,0.2), transparent 70%);
+}
+
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("/src/assets/fonts/Aeonik-Regular.woff2") format("woff2"),
+       url("/src/assets/fonts/Aeonik-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("/src/assets/fonts/Aeonik-Bold.woff2") format("woff2"),
+       url("/src/assets/fonts/Aeonik-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
