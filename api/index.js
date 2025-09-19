@@ -16,7 +16,7 @@ const app = express();
 // --------------------
 app.use(
   cors({
-    origin: "http://localhost:5173", // change this to your frontend URL when deployed
+    origin: "https://opolo-global.vercel.app/", // change this to your frontend URL when deployed
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
