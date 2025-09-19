@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, Clock, DollarSign, Users, Brain, Laptop, Award, CheckCircle, ArrowRight, Star, Zap, Target, BookOpen } from "lucide-react";
-import { Card, CardContent } from "../components/ui/card";
+import { Calendar, Clock, Users, Brain, Laptop, Award, CheckCircle, ArrowRight, Star, Zap, Target, BookOpen } from "lucide-react";
+import { CardContent } from "../components/ui/card";
 
 const program = {
   slug: "ai-bootcamp",
@@ -43,9 +43,7 @@ const faqs = [
 const AiBootcamp = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
 
-  const toggleFAQ = (index) => {
-    setOpenFAQ(openFAQ === index ? null : index);
-  };
+  const toggleFAQ = (index) => setOpenFAQ(openFAQ === index ? null : index);
 
   const handleRegister = () => {
     const query = new URLSearchParams({
@@ -67,11 +65,8 @@ const AiBootcamp = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center space-x-2">
-  <img 
-    src="/assets/Opolo-logo-blue.png" 
-    alt="Opolo Global Logo" 
-    className="w-40 h-10 object-contain"  />
-</Link>
+              <img src="/assets/Opolo-logo-blue.png" alt="Opolo Global Logo" className="w-40 h-10 object-contain" />
+            </Link>
             <Link to="/" className="px-4 py-2 border border-gray-400 rounded-md text-gray-700 hover:text-gray-900 hover:border-gray-900 transition">
               ← Back to Programs
             </Link>
@@ -80,60 +75,33 @@ const AiBootcamp = () => {
       </header>
 
       <main>
-        {/* Hero Section with Background Image */}
-<section className="relative overflow-hidden py-16 sm:py-24">
-  {/* Background Image overlay */}
-  <div
-    className="absolute inset-0 bg-center bg-cover opacity-70"
-    style={{
-      backgroundImage: `url("https://tse1.mm.bing.net/th/id/OIP.xHnCr12G-vwTecMr1E5pAAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3")`
-    }}
-  ></div>
-  
-<div className="absolute inset-0 bg-gradient-to-l from-black/60 to-black/80 mix-blend-multiply"></div>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden py-16 sm:py-24">
+          <div className="absolute inset-0 bg-center bg-cover opacity-70" style={{ backgroundImage: `url("https://tse1.mm.bing.net/th/id/OIP.xHnCr12G-vwTecMr1E5pAAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3")` }}></div>
+          <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-black/80 mix-blend-multiply"></div>
+          <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center max-w-4xl">
+            <motion.h1 initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white">
+              Future-Proof Your Skills with AI
+            </motion.h1>
+            <motion.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+              Join the AI Fundamentals Training Bootcamp — a 5-day intensive program by Opolo Global Innovation in partnership with UNTAP.
+            </motion.h2>
 
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-10 text-base sm:text-lg text-white">
+              <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
+                <Calendar className="w-5 h-5" />
+                <span className="font-semibold">Starts: September 22, 2025</span>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
+                <span className="font-semibold">₦30,000 only</span>
+              </motion.div>
+            </div>
 
-
-  <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center max-w-4xl mx-auto">
-    <motion.h1
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white"
-    >
-      Future-Proof Your Skills with AI
-    </motion.h1>
-    <motion.h2
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
-      className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed"
-    >
-      Join the AI Fundamentals Training Bootcamp — a 5-day intensive program by Opolo Global Innovation in partnership with UNTAP.
-    </motion.h2>
-
-    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-10 text-base sm:text-lg text-white">
-      <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
-        <Calendar className="w-5 h-5" />
-        <span className="font-semibold">Starts: September 22, 2025</span>
-      </motion.div>
-      <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
-        {/* <NairaSign className="w-5 h-5" /> */}
-        <span className="font-semibold">₦30,000 only</span>
-      </motion.div>
-    </div>
-
-    <motion.button
-      whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(0,0,0,0.5)" }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      onClick={handleRegister}
-      className="mx-auto w-full sm:w-auto inline-flex items-center justify-center gap-2 text-lg sm:text-xl font-semibold px-8 sm:px-12 py-4 sm:py-5 bg-indigo-600 text-white rounded-lg"
-    >
-      Register & Pay Now <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
-    </motion.button>
-  </div>
-</section>
+            <motion.button whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(0,0,0,0.5)" }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={handleRegister} className="mx-auto w-full sm:w-auto inline-flex items-center justify-center gap-2 text-lg sm:text-xl font-semibold px-8 sm:px-12 py-4 sm:py-5 bg-indigo-600 text-white rounded-lg">
+              Register & Pay Now <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </motion.button>
+          </div>
+        </section>
 
         {/* Why Join Section */}
         <section className="py-24 bg-gray-100">
@@ -190,10 +158,10 @@ const AiBootcamp = () => {
 
         {/* What You'll Gain & Timeline */}
         <section className="py-24 bg-gray-100">
-          <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center ">
+          <div className="container mx-auto px-4 lg:px-8 max-w-4xl text-center">
             <motion.h2 className="text-4xl lg:text-5xl font-bold mb-12 text-gray-900" {...fadeUp}>What You'll Gain</motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12 ">
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
               {features.map((feat, idx) => (
                 <motion.div key={idx} whileHover={{ scale: 1.05 }} className="flex items-center gap-4 p-6 rounded-xl bg-white shadow-md cursor-pointer" {...fadeUp} transition={{ delay: idx * 0.1 }}>
                   <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
@@ -202,7 +170,7 @@ const AiBootcamp = () => {
               ))}
             </div>
 
-            <motion.div className="bg-blue-600 text-white p-8 rounded-xl shadow-lg bg-[linear-gradient(135deg,#9333ea_0%,#0f172a_100%)]" {...fadeUp}>
+            <motion.div className="bg-[linear-gradient(135deg,#9333ea_0%,#0f172a_100%)] text-white p-8 rounded-xl shadow-lg" {...fadeUp}>
               <h3 className="text-2xl font-bold mb-6">Program Timeline</h3>
               <div className="grid md:grid-cols-3 gap-8 text-center">
                 <div>
@@ -241,23 +209,16 @@ const AiBootcamp = () => {
 
         {/* FAQs Section */}
         <section className="py-24 bg-gray-100">
-          <div className="container mx-auto px-4 lg:px-8 max-w-4xl mx-auto">
+          <div className="container mx-auto px-4 lg:px-8 max-w-4xl">
             <motion.h2 className="text-4xl font-bold text-center mb-16" {...fadeUp}>Frequently Asked Questions</motion.h2>
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
                 <motion.div key={idx} className="border border-gray-300 rounded-xl" {...fadeUp} transition={{ delay: idx * 0.1 }}>
-                  <button
-                    className="w-full p-6 text-left flex justify-between items-center font-semibold text-gray-900"
-                    onClick={() => toggleFAQ(idx)}
-                  >
+                  <button className="w-full p-6 text-left flex justify-between items-center font-semibold text-gray-900" onClick={() => toggleFAQ(idx)}>
                     {faq.question}
                     <span>{openFAQ === idx ? "−" : "+"}</span>
                   </button>
-                  {openFAQ === idx && (
-                    <div className="p-6 pt-0 text-gray-700">
-                      {faq.answer}
-                    </div>
-                  )}
+                  {openFAQ === idx && <div className="p-6 pt-0 text-gray-700">{faq.answer}</div>}
                 </motion.div>
               ))}
             </div>
