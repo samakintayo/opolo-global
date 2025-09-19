@@ -136,62 +136,40 @@ const AiBootcamp = () => {
 </section>
 
         {/* Why Join Section */}
-<section className="py-12 sm:py-16 bg-gray-100">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-    {/* Heading */}
-    <motion.div className="text-center mb-10 sm:mb-12" {...fadeUp}>
-      <h2 className="text-xl sm:text-3xl lg:text-5xl font-bold mb-3 sm:mb-6 text-gray-900 break-words">
-        Build the Skills That Power the Future
-      </h2>
-      <p className="text-sm sm:text-base lg:text-lg text-gray-700 max-w-full sm:max-w-3xl mx-auto leading-relaxed break-words">
-        Artificial Intelligence is reshaping industries worldwide. This bootcamp gives you 
-        the knowledge, tools, and practical experience to become part of this transformation.
-      </p>
-    </motion.div>
-
-    {/* Benefits Grid */}
-    <div className="grid grid-cols-1 gap-4 sm:gap-6 mb-8 sm:mb-12">
-      {benefits.map((benefit, idx) => (
-        <motion.div
-          key={idx}
-          whileHover={{ scale: 1.02 }}
-          className="bg-white border border-gray-200 shadow-sm rounded-xl cursor-pointer w-full"
-          {...fadeUp}
-          transition={{ delay: idx * 0.1 }}
-        >
-          <CardContent className="p-3 sm:p-6 flex flex-col items-start gap-3 sm:gap-4">
-            {/* Icon */}
-            <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-lg bg-blue-600 flex items-center justify-center text-white transition-transform">
-              {benefit.icon}
-            </div>
-
-            {/* Text */}
-            <div className="w-full">
-              <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-1 sm:mb-2 text-gray-900 break-words">
-                {benefit.title}
-              </h3>
-              <p className="text-xs sm:text-sm lg:text-base text-gray-700 leading-snug break-words">
-                {benefit.description}
+        <section className="py-24 bg-gray-100">
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <motion.div className="text-center mb-16" {...fadeUp}>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">Build the Skills That Power the Future</h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Artificial Intelligence is reshaping industries worldwide. This bootcamp gives you 
+                the knowledge, tools, and practical experience to become part of this transformation.
               </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {benefits.map((benefit, idx) => (
+                <motion.div key={idx} whileHover={{ scale: 1.05 }} className="bg-white border border-gray-200 shadow-md rounded-xl cursor-pointer" {...fadeUp} transition={{ delay: idx * 0.1 }}>
+                  <CardContent className="p-8 flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center text-white transition-transform">{benefit.icon}</div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3 text-gray-900">{benefit.title}</h3>
+                      <p className="text-gray-700 leading-relaxed">{benefit.description}</p>
+                    </div>
+                  </CardContent>
+                </motion.div>
+              ))}
             </div>
-          </CardContent>
-        </motion.div>
-      ))}
-    </div>
 
-    {/* Footer Text */}
-    <div className="text-center mt-4 sm:mt-6">
-      <motion.p className="text-xs sm:text-sm lg:text-lg text-blue-700 font-semibold break-words" {...fadeUp}>
-        We're not just training you, we're preparing you to thrive in the age of intelligent technology.
-      </motion.p>
-    </div>
-  </div>
-</section>
-
+            <div className="text-center">
+              <motion.p className="text-lg text-blue-700 font-semibold" {...fadeUp}>We're not just training you, we're preparing you to thrive in the age of intelligent technology.</motion.p>
+            </div>
+          </div>
+        </section>
 
         {/* Who Should Join */}
         <section className="py-24 bg-gray-50">
-          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl"
+          style={{ backgroundColor: 'rgba(248, 250, 252, 0.3)' }}>
             <motion.div className="text-center mb-16" {...fadeUp}>
               <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">Who Should Join?</h2>
               <p className="text-xl text-gray-700 max-w-3xl mx-auto">This program is designed for ambitious minds ready to sharpen their skills.</p>
@@ -225,7 +203,7 @@ const AiBootcamp = () => {
               ))}
             </div>
 
-            <motion.div className="bg-blue-600 text-white p-8 rounded-xl shadow-lg " style={{ background: 'linear-gradient(135deg, #9333ea 0%, #0f172a 100%)', color: '#ffffff' }} {...fadeUp}>
+            <motion.div className="bg-blue-600 text-white p-8 rounded-xl shadow-lg" {...fadeUp}>
               <h3 className="text-2xl font-bold mb-6">Program Timeline</h3>
               <div className="grid md:grid-cols-3 gap-8 text-center">
                 <div>
