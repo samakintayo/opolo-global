@@ -7,5 +7,5 @@ export default defineConfig({
     outDir: "dist",    // relative to frontend
     emptyOutDir: true  // clears old builds
   },
-  base: "../"           // makes JS/CSS relative
+  base: ""           // makes JS/CSS relative
 });
