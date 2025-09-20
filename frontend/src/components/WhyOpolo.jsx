@@ -32,21 +32,21 @@ const WhyOpolo = () => {
   ];
 
   return (
-    <section id="why-opolo" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="why-opolo" className="py-16 sm:py-20 lg:py-24 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Heading */}
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16 px-2 sm:px-0"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               More than learning. A launchpad.
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2 sm:px-0">
               Our programs are designed to spark innovation, build skills, and create impact. 
               We blend global expertise with local relevance, so participants leave with more 
               than knowledge — they leave with networks, opportunities, and practical results.
@@ -55,7 +55,7 @@ const WhyOpolo = () => {
 
           {/* Benefits Grid */}
           <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+            className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-12 sm:mb-16"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -75,19 +75,19 @@ const WhyOpolo = () => {
                 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <Card className="bg-gradient-to-br from-white to-purple-50 border-0 shadow-lg shadow-purple-600/10 hover:shadow-purple-600/20 transition-all duration-300 group">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
+                <Card className="bg-gradient-to-br from-white to-purple-50 border-0 shadow-md sm:shadow-lg shadow-purple-600/10 hover:shadow-purple-600/20 transition-all duration-300 group h-full">
+                  <CardContent className="p-4 lg:p-8 sm:p-6 ">
+                    <div className="flex flex-col sm:flex-row items-center sm:p-6 sm:items-center gap-4 sm:gap-5">
                       {/* Icon */}
-                      <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600 to-slate-900 flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-purple-600 to-slate-900 flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300 mx-auto sm:mx-0">
                         {benefit.icon}
                       </div>
                       {/* Text */}
-                      <div>
-                        <h3 className="font-semibold text-lg mb-2 group-hover:text-purple-600 transition-all duration-300">
+                      <div className="text-center sm:text-left ">
+                        <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-purple-600 transition-all duration-300">
                           {benefit.title}
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                           {benefit.description}
                         </p>
                       </div>
@@ -113,7 +113,7 @@ const WhyOpolo = () => {
               onClick={() =>
                 document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="cursor-pointer inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold bg-purple-600 text-white text-lg hover:bg-purple-700 transition-all"
+              className="cursor-pointer inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold bg-purple-600 text-white text-base sm:text-lg hover:bg-purple-700 transition-all"
             >
               <CheckCircle className="w-5 h-5" />
               See How It Works
