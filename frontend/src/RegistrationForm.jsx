@@ -40,7 +40,7 @@ const RegistrationForm = ({ programType, amount }) => {
 
     try {
       const response = await fetch(
-        "https://opolo-global.vercel.app/api/initiate-payment",
+        "https://opolo-api.vercel.app/api/initiate-payment",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
