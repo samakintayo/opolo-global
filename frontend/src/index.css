@@ -25,20 +25,3 @@
   background: radial-gradient(circle at top left, rgba(59,130,246,0.2), transparent 70%),
               radial-gradient(circle at bottom right, rgba(236,72,153,0.2), transparent 70%);
 }
-
-
-@font-face {
-  font-family: "Aeonik";
-  src: url("/src/assets/fonts/Aeonik-Regular.woff2") format("woff2"),
-       url("/src/assets/fonts/Aeonik-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Aeonik";
-  src: url("/src/assets/fonts/Aeonik-Bold.woff2") format("woff2"),
-       url("/src/assets/fonts/Aeonik-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
