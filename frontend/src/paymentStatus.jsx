@@ -24,7 +24,7 @@ export default function PaymentStatus() {
     async function pollStatus() {
       try {
         const res = await fetch(
-          `http://localhost:4000/api/check-payment/${paymentId}`
+          `https://opolo-global.vercel.app/api/check-payment/${paymentId}`
         );
 
         const data = await res.json();
