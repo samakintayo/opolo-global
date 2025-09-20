@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Users, Brain, Laptop, Award, CheckCircle, ArrowRight, Star, Zap, Target, BookOpen } from "lucide-react";
-import { CardContent } from "../components/ui/card";
+import { CardContent } from "./components/ui/card";
 
 const program = {
   slug: "ai-bootcamp",

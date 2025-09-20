@@ -187,7 +187,7 @@ const Programs = () => {
                   onClick={() => {
                     const programMap = {
                       "SheScales Africa": "https://shescales.opolo.global",
-                      "AI Bootcamp": "/programme/ai-bootcamp",
+                      "AI Bootcamp": "/ai-bootcamp",
                       "Employability Skills Training": "programme/employability",
                       "InnovateForward": "programme/innovateforward",
                       "Opolo Collective": "https://collective.opolo.global",
