@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Users, Brain, Laptop, Award, CheckCircle, ArrowRight, Star, Zap, Target, BookOpen } from "lucide-react";
 import { CardContent } from "./components/ui/card";
+import Footer from "./components/Footer";
 
 const program = {
   slug: "ai-bootcamp",
@@ -226,6 +227,7 @@ const AiBootcamp = () => {
         </section>
       </main>
     </div>
+    
   );
 };
 
