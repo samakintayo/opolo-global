@@ -32,7 +32,7 @@ export default function PaymentStatus() {
         if (data.success && data.payment) {
           const paymentStatus = data.payment.status?.toLowerCase();
 
-          if (paymentStatus === "success") {
+          if (paymentStatus === "success" || paymentStatus === "paid") {
             setStatus("Payment Successful");
             return; // stop polling
           } else if (paymentStatus === "failed") {
