@@ -90,11 +90,11 @@ const Programs = () => {
         <div className="flex items-center justify-center gap-2 mb-4">
           <MapPin className="w-5 h-5 text-orange-500" />
           <span className="text-orange-500 font-medium">
-            Programs running across Africa
+          Explore Our Programs 
           </span>
         </div>
         <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
-          Explore Our Programs
+    Programs running across Africa
         </h2>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto">
           Choose from our lineup of current programs. Each one has its own
@@ -103,7 +103,8 @@ const Programs = () => {
       </div>
 
       {/* Programs Grid */}
-      <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
+      <div className="px-4">
+      <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12 mx-auto">
         {programs.map((program, index) => {
           // alternate highlight: even index = highlighted
           const isHighlighted = index % 2 === 0;
@@ -154,7 +155,7 @@ const Programs = () => {
                 </p>
 
                 {/* Features */}
-                <ul className="space-y-2 mb-6 flex-1">
+                {/* <ul className="space-y-2 mb-6 flex-1">
                   {program.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-sm">
                       <span
@@ -175,7 +176,7 @@ const Programs = () => {
                       </span>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
 
                 {/* Button */}
                 <button
@@ -208,21 +209,9 @@ const Programs = () => {
           );
         })}
       </div>
-
-      {/* Bottom CTA */}
-      <div className="text-center">
-        <button
-          className="bg-orange-500 hover:bg-orange-400 text-white font-semibold px-8 py-4 rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer"
-          onClick={() =>
-            document
-              .getElementById("how-it-works")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-        >
-          Start Exploring
-          <ArrowRight className="w-5 h-5" />
-        </button>
       </div>
+
+     
     </div>
   </div>
 </section>

@@ -87,9 +87,7 @@ const WhyOpolo = () => {
                         <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2 group-hover:text-purple-600 transition-all duration-300">
                           {benefit.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                          {benefit.description}
-                        </p>
+            
                       </div>
                     </div>
                   </CardContent>

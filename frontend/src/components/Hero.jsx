@@ -60,20 +60,11 @@ const Hero = () => {
               Explore Programs
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
-            <button
-              className="flex items-center gap-2 border border-gray-300 hover:border-gray-400 text-gray-700 bg-white hover:bg-gray-50 font-medium text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-lg shadow-sm transition"
-              onClick={() =>
-                document
-                  .getElementById("how-it-works")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              See How It Works
-            </button>
+     
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 max-w-xs sm:max-w-2xl mx-auto">
+        
+          {/* <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 max-w-xs sm:max-w-2xl mx-auto">
             <div className="text-center">
               <div className="text-xl sm:text-3xl font-bold text-blue-600 mb-1 sm:mb-2">
                 500+
@@ -106,8 +97,8 @@ const Hero = () => {
                 Success Rate
               </div>
             </div>
-          </div>
-        </div>
+          </div>*/}
+        </div> 
       </div>
     </section>
   );

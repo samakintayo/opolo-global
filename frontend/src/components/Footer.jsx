@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200">
+    <footer id="footer" className="bg-gray-900 text-gray-200">
       {/* Final CTA Section */}
       <div className="py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-8 text-center">
@@ -55,11 +55,11 @@ const Footer = () => {
               <h4 className="font-semibold mb-4 text-left">Programs</h4>
               <ul className="space-y-3 opacity-80 text-left text-sm sm:text-base">
                 {[
-                  { label: "SheScales Africa", href: "#" },
+                  { label: "SheScales Africa", href: "hthttps://shescales.opolo.global" },
                   { label: "AI Bootcamp", href: "/ai-bootcamp" },
                   { label: "Employability Skills", href: "#" },
                   { label: "InnovateForward", href: "#" },
-                  { label: "Opolo Collective", href: "#" },
+                  { label: "Opolo Collective", href: "https://collective.opolo.global" },
                 ].map((program) => (
                   <li key={program.label}>
                     <a href={program.href} className="hover:text-indigo-400 transition-colors">

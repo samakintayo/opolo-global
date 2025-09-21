@@ -30,15 +30,15 @@ const Header = () => {
             <a href="#programs" className="text-gray-600 hover:text-indigo-600 font-medium">
               Programs
             </a>
-            <a href="#footer" className="text-gray-600 hover:text-indigo-600 font-medium">
+            {/* <a href="#footer" className="text-gray-600 hover:text-indigo-600 font-medium">
               Contact
-            </a>
+            </a> */}
           </nav>
 
           {/* CTA Button (desktop only) */}
           <div className="hidden md:flex">
             <a
-              href="#programs"
+              href="#footer"
               className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
                          text-white font-semibold shadow-md transition 
                          hover:opacity-90 hover:shadow-lg hover:shadow-purple-400/50"
