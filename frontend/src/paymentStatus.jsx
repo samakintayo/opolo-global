@@ -6,71 +6,56 @@ import { motion } from "framer-motion";
 export default function PaymentStatus() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("⏳ Checking payment...");
-  const [attempts, setAttempts] = useState(0);
   const MAX_ATTEMPTS = 20; // stop after ~1 minute
-  const isSuccess = status?.toLowerCase().includes("success");
+
+  const isSuccess = status?.toLowerCase().includes("success") || status?.toLowerCase().includes("paid");
   const isPending = status?.toLowerCase().includes("pending");
   const isFailed = status?.toLowerCase().includes("fail");
 
-
   useEffect(() => {
     const paymentId = searchParams.get("id");
+    if (!paymentId) return setStatus("⚠️ No payment ID in URL");
 
-    if (!paymentId) {
-      setStatus("⚠️ No payment ID in URL");
-      return;
-    }
+    let attempts = 0;
 
-    async function pollStatus() {
+    const pollStatus = async () => {
       try {
-        const res = await fetch(
-          `https://opolo-api.vercel.app/api/check-payment/${paymentId}`
-        );
-
+        const res = await fetch(`https://opolo-api.vercel.app/api/check-payment/${paymentId}`);
         const data = await res.json();
 
         if (data.success && data.payment) {
           const paymentStatus = data.payment.status?.toLowerCase();
 
-          if (paymentStatus === "success" || paymentStatus === "paid") {
+          if (paymentStatus === "paid" || paymentStatus === "success") {
             setStatus("Payment Successful");
             return; // stop polling
           } else if (paymentStatus === "failed") {
             setStatus("❌ Payment Failed");
             return; // stop polling
           } else {
-            // pending or unknown, retry
-            if (attempts < MAX_ATTEMPTS) {
-              setAttempts((prev) => prev + 1);
-              setTimeout(pollStatus, 3000);
-            } else {
-              setStatus("⚠️ Payment status unknown. Please check later.");
-            }
+            // still pending
+            attempts++;
+            if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+            else setStatus("⚠️ Payment status unknown. Please check later.");
           }
         } else {
-          // no record yet, retry
-          if (attempts < MAX_ATTEMPTS) {
-            setAttempts((prev) => prev + 1);
-            setTimeout(pollStatus, 3000);
-          } else {
-            setStatus("⚠️ Payment not found. Please check later.");
-          }
+          // payment record not found yet
+          attempts++;
+          if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+          else setStatus("⚠️ Payment not found. Please check later.");
         }
       } catch (err) {
         console.error("Frontend error:", err.message);
-        if (attempts < MAX_ATTEMPTS) {
-          setAttempts((prev) => prev + 1);
-          setTimeout(pollStatus, 3000);
-        } else {
-          setStatus("⚠️ Error checking payment. Please try again later.");
-        }
+        attempts++;
+        if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+        else setStatus("⚠️ Error checking payment. Please try again later.");
       }
-    }
+    };
 
     pollStatus();
-  }, [searchParams, attempts]);
+  }, [searchParams]);
 
-   return (
+  return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 px-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 30 }}

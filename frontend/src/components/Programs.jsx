@@ -189,8 +189,8 @@ const Programs = () => {
                     const programMap = {
                       "SheScales Africa": "https://shescales.opolo.global",
                       "AI Bootcamp": "/ai-bootcamp",
-                      "Employability Skills Training": "programme/employability",
-                      "InnovateForward": "programme/innovateforward",
+                      "Employability Skills Training": "/employability",
+                      "InnovateForward": "/innovateforward",
                       "Opolo Collective": "https://collective.opolo.global",
                     };
                     const url = programMap[program.title];
