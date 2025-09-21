@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Users, Brain, Laptop, Award, CheckCircle, ArrowRight, Star, Zap, Target, BookOpen } from "lucide-react";
 import { CardContent } from "./components/ui/card";
-import Footer from "./components/Footer";
 
 const program = {
   slug: "ai-bootcamp",
@@ -78,10 +77,10 @@ const AiBootcamp = () => {
       <main>
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 sm:py-24">
-          <div className="absolute inset-0 bg-center bg-cover opacity-70" style={{ backgroundImage: `url("https://tse1.mm.bing.net/th/id/OIP.xHnCr12G-vwTecMr1E5pAAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3")` }}></div>
-          <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-black/80 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-center bg-cover opacity-100" style={{ backgroundImage: `url("/assets/ai-bg-1.svg")` }}></div>
+          <div className="absolute inset-0 bg-gradient-to-l from-black/50 to-black/60 mix-blend-multiply"></div>
           <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center max-w-4xl">
-            <motion.h1 initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white">
+            <motion.h1 initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-[#F37AD1] to-[#F97415CC] bg-clip-text text-transparent">
               Future-Proof Your Skills with AI
             </motion.h1>
             <motion.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
@@ -94,7 +93,7 @@ const AiBootcamp = () => {
                 <span className="font-semibold">Starts: September 22, 2025</span>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
-                <span className="font-semibold">₦30,000 only</span>
+                <span className="font-semibold text-orange-400">₦30,000 only</span>
               </motion.div>
             </div>
 
@@ -226,9 +225,24 @@ const AiBootcamp = () => {
           </div>
         </section>
       </main>
+
+       <footer id="footer" className="bg-gray-900 text-gray-200">
+            {/* Final CTA Section */}
+            <div className="py-10 md:py-14">
+                    
+                {/* Copyright */}
+                <div className="border-t border-gray-800 mt-10 sm:mt-14 pt-6 text-center opacity-60 text-sm sm:text-base">
+                  <p>&copy; {new Date().getFullYear()} Opolo Global Innovation. All rights reserved.</p>
+                </div>
+             
+            </div>
+          </footer>
     </div>
     
   );
+  
 };
+
+
 
 export default AiBootcamp;
