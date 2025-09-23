@@ -1,22 +1,21 @@
 // src/pages/PaymentStatus.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function PaymentStatus() {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState("⏳ Checking payment...");
-  const MAX_ATTEMPTS = 20; // stop after ~1 minute
+  const MAX_ATTEMPTS = 20;
+  const attemptsRef = useRef(0);
 
-  const isSuccess = status?.toLowerCase().includes("success") || status?.toLowerCase().includes("paid");
-  const isPending = status?.toLowerCase().includes("pending");
-  const isFailed = status?.toLowerCase().includes("fail");
+  const isSuccess = status.toLowerCase().includes("success") || status.toLowerCase().includes("paid");
+  const isPending = status.toLowerCase().includes("pending");
+  const isFailed = status.toLowerCase().includes("fail");
 
   useEffect(() => {
     const paymentId = searchParams.get("id");
     if (!paymentId) return setStatus("⚠️ No payment ID in URL");
-
-    let attempts = 0;
 
     const pollStatus = async () => {
       try {
@@ -28,26 +27,26 @@ export default function PaymentStatus() {
 
           if (paymentStatus === "paid" || paymentStatus === "success") {
             setStatus("Payment Successful");
-            return; // stop polling
+            return;
           } else if (paymentStatus === "failed") {
             setStatus("❌ Payment Failed");
-            return; // stop polling
+            return;
           } else {
             // still pending
-            attempts++;
-            if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+            attemptsRef.current++;
+            if (attemptsRef.current < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
             else setStatus("⚠️ Payment status unknown. Please check later.");
           }
         } else {
           // payment record not found yet
-          attempts++;
-          if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+          attemptsRef.current++;
+          if (attemptsRef.current < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
           else setStatus("⚠️ Payment not found. Please check later.");
         }
       } catch (err) {
         console.error("Frontend error:", err.message);
-        attempts++;
-        if (attempts < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
+        attemptsRef.current++;
+        if (attemptsRef.current < MAX_ATTEMPTS) setTimeout(pollStatus, 3000);
         else setStatus("⚠️ Error checking payment. Please try again later.");
       }
     };
