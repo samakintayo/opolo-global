@@ -109,7 +109,7 @@ export default function PaymentStatus() {
               : "text-red-600"
           }`}
         >
-          Payment {status}
+           {status}
         </h1>
 
         {/* Subtext */}
