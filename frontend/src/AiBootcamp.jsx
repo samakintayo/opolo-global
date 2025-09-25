@@ -175,17 +175,17 @@ const AiBootcamp = () => {
               <div className="grid md:grid-cols-3 gap-8 text-center">
                 <div>
                   <Calendar className="w-8 h-8 mx-auto mb-3 opacity-90" />
-                  <div className="font-bold text-lg">September 22 – 26, 2025</div>
+                  <div className="font-bold text-lg text-orange-400">September 22 – 26, 2025</div>
                   <div className="opacity-90">5 days intensive</div>
                 </div>
                 <div>
                   <Clock className="w-8 h-8 mx-auto mb-3 opacity-90" />
-                  <div className="font-bold text-lg">2-3 hours daily</div>
+                  <div className="font-bold text-lg text-orange-400">2-3 hours daily</div>
                   <div className="opacity-90">Online & practical sessions</div>
                 </div>
                 <div>
                   <Award className="w-8 h-8 mx-auto mb-3 opacity-90" />
-                  <div className="font-bold text-lg">₦30,000 only</div>
+                  <div className="font-bold text-lg text-orange-400">₦30,000 only</div>
                   <div className="opacity-90">Full program investment</div>
                 </div>
               </div>
