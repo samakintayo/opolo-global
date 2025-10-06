@@ -84,13 +84,13 @@ const AiBootcamp = () => {
               Future-Proof Your Skills with AI
             </motion.h1>
             <motion.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
-              Join the AI Fundamentals Training Bootcamp — a 5-day intensive program by Opolo Global Innovation in partnership with UNTAP.
+              Join the AI Fundamentals Training Bootcamp — a 2-day intensive program by Opolo Global Innovation in partnership with UNTAP.
             </motion.h2>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-10 text-base sm:text-lg text-white">
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                <span className="font-semibold">Starts: September 22, 2025</span>
+                <span className="font-semibold">29th - 30th October, 2025</span>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
                 <span className="font-semibold text-orange-400">₦30,000 only</span>

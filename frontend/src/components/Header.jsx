@@ -95,9 +95,9 @@ const Header = () => {
             <a href="#programs" className="block text-gray-600 hover:text-indigo-600 font-medium">
               Programs
             </a>
-            <a href="#footer" className="block text-gray-600 hover:text-indigo-600 font-medium">
+            {/* <a href="#footer" className="block text-gray-600 hover:text-indigo-600 font-medium">
               Contact
-            </a>
+            </a> */}
             <a
               href="#programs"
               className="block w-full text-center px-4 py-2 rounded-lg 
