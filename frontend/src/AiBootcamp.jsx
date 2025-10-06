@@ -6,7 +6,7 @@ import { CardContent } from "./components/ui/card";
 
 const program = {
   slug: "ai-bootcamp",
-  title: "5-Day Intensive AI Training Program",
+  title: "2-Days Intensive AI Training Program",
   type: "AI Bootcamp",
   amount: 30000,
 };
