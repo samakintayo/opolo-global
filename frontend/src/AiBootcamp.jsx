@@ -90,14 +90,14 @@ const AiBootcamp = () => {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-10 text-base sm:text-lg text-white">
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                <span className="font-semibold">29th - 30th October, 2025</span>
+                <span className="font-semibold">Starts: 29th October, 2025</span>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
                 <span className="font-semibold text-orange-400">₦30,000 only</span>
               </motion.div>
             </div>
 
-            <motion.button whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(0,0,0,0.5)" }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={handleRegister} className="mx-auto w-full sm:w-auto inline-flex items-center justify-center gap-2 text-lg sm:text-xl font-semibold px-8 sm:px-12 py-4 sm:py-5 bg-indigo-600 text-white rounded-lg">
+            <motion.button whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px rgba(0,0,0,0.5)" }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={handleRegister} className="mx-auto cursor-pointer w-full sm:w-auto inline-flex items-center justify-center gap-2 text-lg sm:text-xl font-semibold px-8 sm:px-12 py-4 sm:py-5 bg-indigo-600 text-white rounded-lg">
               Register & Pay Now <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </motion.button>
           </div>
@@ -175,8 +175,8 @@ const AiBootcamp = () => {
               <div className="grid md:grid-cols-3 gap-8 text-center">
                 <div>
                   <Calendar className="w-8 h-8 mx-auto mb-3 opacity-90" />
-                  <div className="font-bold text-lg text-orange-400">September 22 – 26, 2025</div>
-                  <div className="opacity-90">5 days intensive</div>
+                  <div className="font-bold text-lg text-orange-400">October 29 – 30, 2025</div>
+                  <div className="opacity-90">2 days intensive</div>
                 </div>
                 <div>
                   <Clock className="w-8 h-8 mx-auto mb-3 opacity-90" />
@@ -200,7 +200,7 @@ const AiBootcamp = () => {
             <p className="text-xl text-gray-700 mb-12">
               Take the step to become AI-ready. Register now, secure your slot, and complete your payment online.
             </p>
-            <button onClick={handleRegister} className="inline-flex items-center justify-center gap-2 text-xl px-12 py-6 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition">
+            <button onClick={handleRegister} className="cursor-pointer inline-flex items-center justify-center gap-2 text-xl px-12 py-6 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition">
               Register & Pay Now <ArrowRight className="w-6 h-6" />
             </button>
             <p className="text-green-600 font-semibold mt-6">⚡ Limited slots available. Don't miss out!</p>
