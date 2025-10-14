@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "./App.css";
+import "./index.css";
 import {
   Calendar,
   Clock,
@@ -305,10 +307,10 @@ const InnovateForward = () => {
       {/* OBJECTIVES */}
       <section className="py-20 bg-gray-50 px-4">
         <div className="text-center max-w-3xl mx-auto mb-12 animate-fadeInUp">
-          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-1 rounded-full mb-4">
+          {/* <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-1 rounded-full mb-4">
             <Lightbulb className="w-5 h-5" />
             <span className="font-medium text-sm">Section 4</span>
-          </div>
+          </div> */}
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Key Learning Objectives</h2>
           <p className="text-gray-600 text-lg">
             By the end of this 2-day program, participants will be able to:
@@ -352,6 +354,86 @@ const InnovateForward = () => {
           ))}
         </div>
       </section>
+
+      <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-yellow-50">
+  <div className="max-w-5xl mx-auto px-4">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
+        Program Logistics
+      </h2>
+      <p className="text-gray-600 text-lg">
+        Key details to help you plan ahead for a seamless experience.
+      </p>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100">
+      <div className="grid md:grid-cols-2 gap-10">
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <Clock className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Duration</h3>
+              <p className="text-gray-600">2 Days (Weekday Format)</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Calendar className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Dates</h3>
+              <p className="text-gray-600">November 5–6, 2025</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Target className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Delivery</h3>
+              <p className="text-gray-600">In-Person (Lagos, Nigeria)</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="flex items-start gap-4">
+            <DollarSign className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Fee</h3>
+              <p className="text-gray-600">₦250,000</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <CheckCircle className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Certificate</h3>
+              <p className="text-gray-600">Issued upon successful completion</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Users className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Seats Available</h3>
+              <p className="text-gray-600">30 participants</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <Building2 className="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-gray-800">Organized by</h3>
+              <p className="text-gray-600">
+                Opolo Global Innovation & Bridge57
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA */}
       <section className="py-20 bg-gradient-to-br from-purple-600 to-orange-500 text-white text-center px-4">
