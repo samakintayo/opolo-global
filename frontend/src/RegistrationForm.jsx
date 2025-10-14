@@ -75,7 +75,7 @@ const RegistrationForm = ({ programType, amount }) => {
   const totalAmount = amount * formData.quantity;
 
   return (
-    <div className="flex items-center justify-center py-10 bg-[#F5F5F5]">
+    <div className="flex items-center justify-center py-10 bg-[#ffffff]">
       <div className="w-full max-w-sm md:max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8">
         {/* Header */}
         <div className="text-center mb-4 md:mb-5">
