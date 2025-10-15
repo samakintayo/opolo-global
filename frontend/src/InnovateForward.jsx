@@ -223,6 +223,10 @@ const InnovateForward = () => {
             business leaders with practical tools for strategic innovation,
             growth, and business development in today's competitive economy.
           </h2>
+          <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-1 rounded-full mb-10">
+             
+              <span className="font-medium text-sm">Hosted in collaboration with Bridge57</span>
+            </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {stats.map((item, i) => (
