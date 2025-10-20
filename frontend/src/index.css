@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+   @apply font-sans;
+}
+
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(59,130,246,0.6); }
+  50% { box-shadow: 0 0 20px rgba(59,130,246,0.9); }
+}
+.animate-glow {
+  animation: glow 2s infinite alternate;
+}
+
+/* Gradient background overlay */
+.gradient-hero {
+  background: radial-gradient(circle at top left, rgba(59,130,246,0.2), transparent 70%),
+              radial-gradient(circle at bottom right, rgba(236,72,153,0.2), transparent 70%);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeInUp { animation: fadeInUp 700ms cubic-bezier(.16,.84,.44,1) both; }
+.animate-fadeIn { animation: fadeIn 700ms ease both; }
+.animate-slideDown { animation: slideDown 300ms ease both; }
+
+/* Helper delays (optional) */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Small page-loaded class used to gate initial transitions if needed */
+.page-loaded .animate-fadeInUp,
+.page-loaded .animate-fadeIn,
+.page-loaded .animate-slideDown {
+  /* animations run when page-loaded is added by JS */
+}
+
